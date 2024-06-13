@@ -1,0 +1,44 @@
+body {
+    font-family: "Roboto Mono", monospace;
+    font-optical-sizing: auto;
+}
+
+.margin-left{
+    margin-left: 80px;
+}
+
+p{
+    font-size: .6rem;
+}
+
+.margin-right{
+    margin-right: 80px;
+}
+
+#search-bar {
+    display: none;
+  }
+
+.navbar-toggler:hover,
+.navbar-toggler:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+    /* Custom media query for the navbar toggler */
+    @media (min-width: 764px) {
+        .navbar-toggler{
+          display: none;
+        }
+      }
+      @media (max-width: 763px) {
+        .navbar-na {
+          display: none;
+        }
+        .navbar-collapse.show .navbar-nav {
+          display: block;
+        }
+        .form-inline{
+            display: none !important;
+          }
+      }
