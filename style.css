@@ -25,6 +25,17 @@ p{
     outline: none;
 }
 
+
+.btn {
+  background: #5f82a9;
+  border: none;
+}
+
+.btn:hover{
+  transition: .5s;
+  background: green;
+}
+
     /* Custom media query for the navbar toggler */
     @media (min-width: 764px) {
         .navbar-toggler{
