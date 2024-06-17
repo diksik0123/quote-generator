@@ -36,6 +36,18 @@ p{
   background: green;
 }
 
+.btn.active{
+  background: #5f82a9;
+}
+
+.category-btn{
+  background: transparent;
+  border: 1px solid #5f82a9;
+  color: black;
+  border-radius: 20px;
+}
+
+
     /* Custom media query for the navbar toggler */
     @media (min-width: 764px) {
         .navbar-toggler{
