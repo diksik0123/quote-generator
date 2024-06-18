@@ -39,34 +39,49 @@
         </form>
       </nav>
 
-      <div class="container mt-5 mb-5">
-        <div class="row text-center">
-            <div class="col-3">
-                <button class="btn btn-primary category-btn">Motivation</button>
-            </div>
-            <div class="col-3">
-                <button class="btn btn-primary category-btn">Self Endurance</button>
-            </div>
-            <div class="col-3">
-                <button class="btn btn-primary category-btn">Discipline</button>
-            </div>
-            <div class="col-3">
-                <button class="btn btn-primary category-btn">Overcoming Adversity</button>
-            </div>
-        </div>
-
 
         <div class="container mt-5">
             <div class="row">
-                <div class="col-md-6 offset-md-3 text-center">
+                <div class="col-md-6 offset-md-3 mb-5">
+                    <div class="quote-container text-center">
                     <div class="quote-box">
                         <i class="fa fa-quote-left" aria-hidden="true"></i>
                         <span id="quote">This is a quote</span>
                         <i class="fa fa-quote-right" aria-hidden="true"></i>
                     </div>
                     <button class="btn btn-primary mt-3" id="new-quote">New Quote</button>
+                    <button class="btn btn-primary mt-3" id="save-quote">Save Quote</button>
+                </div>
                 </div>
             </div>
+        </div>
+
+        <div class="container mt-5 mb-5">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="category-container">
+                        <h3>Categories</h3>
+                        <div class="row row-cols-2 mt-3">
+                          <div class="col"><button class="btn btn-primary category-btn mb-2">Motivation</button></div>
+                          <div class="col"><button class="btn btn-primary category-btn mb-2">Discipline</button></div>
+                          <div class="col"><button class="btn btn-primary category-btn mb-2">Self Endurance</button></div>
+                          <div class="col"><button class="btn btn-primary category-btn">Overcoming Adversity</button></div>
+                        </div>
+                      </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <div class="save-container">
+                        <h3>Saved Quotes</h3>
+                        <div class="saved-quotes">
+                            <ul class="list-group">
+                            </ul>
+                        </div> 
+                    </div>
+
+                </div>
+            </div>
+        </div>
 
     
 
