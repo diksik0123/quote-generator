@@ -1,3 +1,9 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
     font-family: "Roboto Mono", monospace;
     font-optical-sizing: auto;
@@ -46,6 +52,28 @@ p{
   color: black;
   border-radius: 20px;
 }
+
+.list-group-item{
+  border: #5f82a9;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.quote-text {
+  flex-grow: 1;
+}
+
+.remove-btn {
+  margin-left: 15px;
+  border: none;
+  cursor: pointer;
+  color: #5f82a9;
+  font-size: 2rem;
+}
+
+
 
 
     /* Custom media query for the navbar toggler */
