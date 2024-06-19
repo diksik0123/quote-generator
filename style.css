@@ -21,16 +21,12 @@ p{
     margin-right: 80px;
 }
 
-#search-bar {
-    display: none;
-  }
 
 .navbar-toggler:hover,
 .navbar-toggler:focus {
     box-shadow: none;
     outline: none;
 }
-
 
 .btn {
   background: #5f82a9;
@@ -44,6 +40,10 @@ p{
 
 .btn.active{
   background: #5f82a9;
+}
+
+.icon-col{
+  color: #5f82a9;
 }
 
 .category-btn{
@@ -73,23 +73,14 @@ p{
   font-size: 2rem;
 }
 
+.saved-quotes {
+  height: 200px; /* Set your desired height */
+  overflow-y: auto;
+  padding: 0; /* Optional: Adds padding inside the scrollable area */
 
+}
 
-
-    /* Custom media query for the navbar toggler */
-    @media (min-width: 764px) {
-        .navbar-toggler{
-          display: none;
-        }
-      }
-      @media (max-width: 763px) {
-        .navbar-na {
-          display: none;
-        }
-        .navbar-collapse.show .navbar-nav {
-          display: block;
-        }
-        .form-inline{
-            display: none !important;
-          }
-      }
+#Capa_1{
+  height: 100px;
+  width: 100px;
+}
