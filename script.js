@@ -32,13 +32,96 @@ let quoteElement = document.querySelector('#quote');
 const newQuoteButton = document.querySelector('#new-quote');
 const saveQuoteButton = document.querySelector('#save-quote');
 let listSavedQuote = document.querySelector('.list-group');
+let savedQuotes = document.querySelector('.quotes-saved');
 const defMessage = document.querySelector('.default-msg');
 
+// Function to save all quotes to localStorage
+const saveQuotesToLocalStorage = () => {
+    const quotes = [];
+    const savedQuotes = listSavedQuote.getElementsByTagName('li');
+    for (let i = 0; i < savedQuotes.length; i++) {
+        quotes.push(savedQuotes[i].textContent.replace('×', '').trim());
+    }
+    localStorage.setItem('savedQuotes', JSON.stringify(quotes));
+};
+
+// Function to save the state of category buttons to localStorage
+const saveCategoryStateToLocalStorage = () => {
+    const categories = {};
+    categoryButtons.forEach(button => {
+        categories[button.textContent.trim()] = button.classList.contains('active');
+    });
+    localStorage.setItem('categories', JSON.stringify(categories));
+};
+
+// Function to save the current quote to localStorage
+const saveCurrentQuoteToLocalStorage = () => {
+    localStorage.setItem('currentQuote', quoteElement.textContent);
+};
+
+// Function to toggle the visibility of the default message
+const toggleDefMessageVisibility = () => {
+    if (listSavedQuote.getElementsByTagName('li').length === 0){
+        defMessage.style.display = 'block'; // Show default message if list is empty
+    } else {
+        defMessage.style.display = 'none'; // Hide default message if there are saved quotes
+    }
+};
+
+// Function to add a quote to the list
+const addQuoteToList = (quote) => {
+    const savedQuote = document.createElement('li');
+    savedQuote.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center');
+
+    const quoteText = document.createElement('span');
+    quoteText.textContent = quote;
+    quoteText.classList.add('quote-text');
+
+    const removeButton = document.createElement('div');
+    removeButton.innerHTML = '<i class="fas fa-times"></i>';
+    removeButton.classList.add('remove-btn');
+    removeButton.addEventListener('click', function() {
+        listSavedQuote.removeChild(savedQuote);
+        saveQuotesToLocalStorage();
+        toggleDefMessageVisibility(); // Update visibility of defMessage after removing quote
+        if (listSavedQuote.getElementsByTagName('li').length === 0) {
+            savedQuotes.classList.remove('scrollable-list');
+        }
+    });
+
+    savedQuote.appendChild(quoteText);
+    savedQuote.appendChild(removeButton);
+    savedQuotes.classList.add('scrollable-list');
+
+    listSavedQuote.appendChild(savedQuote);
+};
 
 categoryButtons.forEach(button => {
     button.addEventListener('click', () => {
         button.classList.toggle('active');
+        saveCategoryStateToLocalStorage();
     });
+});
+
+// Load saved quotes, categories, and current quote from localStorage on page load
+document.addEventListener('DOMContentLoaded', () => {
+    const savedQuotes = JSON.parse(localStorage.getItem('savedQuotes')) || [];
+    savedQuotes.forEach(quote => addQuoteToList(quote));
+    toggleDefMessageVisibility();
+
+    const savedCategories = JSON.parse(localStorage.getItem('categories'));
+    if (savedCategories) {
+        categoryButtons.forEach(button => {
+            if (savedCategories[button.textContent.trim()]) {
+                button.classList.add('active');
+            }
+        });
+    }
+
+    const savedCurrentQuote = localStorage.getItem('currentQuote');
+    if (savedCurrentQuote) {
+        quoteElement.textContent = savedCurrentQuote;
+    }
 });
 
 // Function to generate a new quote based on selected categories
@@ -72,9 +155,11 @@ newQuoteButton.addEventListener('click', () => {
         let randomIndex = Math.floor(Math.random() * allQuotes.length);
         quoteElement.textContent = allQuotes[randomIndex];
     }
+
+    saveCurrentQuoteToLocalStorage();
 });
 
-
+// Function to add a saved quote
 saveQuoteButton.addEventListener('click', function() {
     const currentQuote = quoteElement.textContent;
 
@@ -86,35 +171,9 @@ saveQuoteButton.addEventListener('click', function() {
             return; // Quote already exists, do not add it again
         }
     }
-    const savedQuote = document.createElement('li');
-    savedQuote.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center');
 
-    const quoteText = document.createElement('span');
-    quoteText.textContent = currentQuote;
-    quoteText.classList.add('quote-text');
-
-    const removeButton = document.createElement('div');
-    removeButton.innerHTML = '<i class="fas fa-times"></i>';
-    removeButton.classList.add('remove-btn');
-    removeButton.addEventListener('click', function() {
-        listSavedQuote.removeChild(savedQuote);
-        if (listSavedQuote.getElementsByTagName('li').length === 0) {
-            listSavedQuote.appendChild(defMessage);
-        }
-    });
-
-    savedQuote.appendChild(quoteText);
-    savedQuote.appendChild(removeButton);
-
-    listSavedQuote.appendChild(savedQuote);
-    defMessage.remove();
+    addQuoteToList(currentQuote);
+    saveQuotesToLocalStorage(); // Save quotes to localStorage
+    toggleDefMessageVisibility(); // Update visibility of defMessage after adding quote
+    alert('Quote saved!');
 });
-
-
-
-
-
-
-
-
-
